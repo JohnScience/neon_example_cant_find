@@ -1,6 +1,6 @@
 use neon::prelude::*;
-use std::path::PathBuf;
 use std::fs::create_dir;
+use std::path::PathBuf;
 
 pub(crate) const APP_NAME: &'static str = "AppName";
 
@@ -27,10 +27,11 @@ impl From<Outcome> for f64 {
 
 impl Outcome {
     fn export(cx: &mut ModuleContext) -> NeonResult<()> {
-        export_enum!(cx, Outcome, [
-            (Success, "SUCCESS"),
-            (CreateDirFailed, "CREATE_DIR_FAILED")
-        ]);
+        export_enum!(
+            cx,
+            Outcome,
+            [(Success, "SUCCESS"), (CreateDirFailed, "CREATE_DIR_FAILED")]
+        );
         Ok(())
     }
 }
@@ -43,18 +44,25 @@ fn js_init_app_dir(mut cx: FunctionContext) -> JsResult<JsNumber> {
 
 fn init_app_dir(mut app_data_path: PathBuf) -> Outcome {
     use Outcome::*;
-    
+
     dbg!(&app_data_path);
 
     app_data_path.push(APP_NAME);
-    if app_data_path.exists() { return Success };
+    if app_data_path.exists() {
+        return Success;
+    } else if create_dir(&app_data_path).is_err() {
+        return CreateDirFailed;
+    };
     for img_fmt in ["nifti", "dicom"].iter() {
         app_data_path.push(img_fmt);
-        create_dir(&app_data_path).unwrap();
-        //if create_dir(&app_data_path).is_err() { return CreateDirFailed };
+        if create_dir(&app_data_path).is_err() {
+            return CreateDirFailed;
+        };
         for res_kind in ["images", "masks"].iter() {
             app_data_path.push(res_kind);
-            if create_dir(&app_data_path).is_err() { return CreateDirFailed };
+            if create_dir(&app_data_path).is_err() {
+                return CreateDirFailed;
+            };
             app_data_path.pop();
         }
         app_data_path.pop();
