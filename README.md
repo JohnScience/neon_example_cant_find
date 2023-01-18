@@ -1,7 +1,7 @@
 # Example showing the need to deal with Windows execution policies
 
 On Windows, the default execution policy is `Restricted`. This means that
-by default even simple Rust programs cannot be executed.
+by default even [simple Rust programs](https://github.com/JohnScience/neon_example_cant_find/blob/main/pure_rust_version/src/main.rs) cannot be executed.
 
 ![screenshot](https://i.imgur.com/XVCkgCS.png)
 
