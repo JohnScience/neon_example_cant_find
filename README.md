@@ -12,3 +12,7 @@ However, this doesn't work for [`neon`](https://crates.io/crates/neon) modules f
 ## Open questions
 
 How does Node.js deal with this problem? How should [`neon`](https://crates.io/crates/neon) modules' authors deal with this problem?
+
+## Related issues
+
+* [neon-bindings/neon/issues/"Neon modules for Electron apps targeting Windows may require privileges"](https://github.com/neon-bindings/neon/issues/956)
