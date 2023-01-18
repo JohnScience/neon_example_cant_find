@@ -1,4 +1,4 @@
-# Example showing the need to deal with Windows execution policies
+# INCORRECT example showing the need to deal with Windows execution policies
 
 On Windows, the default execution policy is `Restricted`. This means that
 by default even [simple Rust programs](https://github.com/JohnScience/neon_example_cant_find/blob/main/pure_rust_version/src/main.rs) cannot be executed.
@@ -16,3 +16,7 @@ How does Node.js deal with this problem? How should [`neon`](https://crates.io/c
 ## Related issues
 
 * [neon-bindings/neon/issues/"Neon modules for Electron apps targeting Windows may require privileges"](https://github.com/neon-bindings/neon/issues/956)
+
+## Why is this example incorrect?
+
+As <https://github.com/kjvalencik> pointed out, the script shouldn't have worked in the first place because it didn't properly handle the case where the <app_data_dir>/<APP_NAME> does not exist. The step with creation of the directory was omitted. After the fix, it worked properly even without permission elevation.
