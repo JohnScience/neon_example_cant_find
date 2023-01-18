@@ -19,4 +19,4 @@ How does Node.js deal with this problem? How should [`neon`](https://crates.io/c
 
 ## Why is this example incorrect?
 
-As <https://github.com/kjvalencik> pointed out, the script shouldn't have worked in the first place because it didn't properly handle the case where the <app_data_dir>/<APP_NAME> does not exist. The step with creation of the directory was omitted. After the fix, it worked properly even without permission elevation.
+As <https://github.com/kjvalencik> pointed out in the related issue, the script shouldn't have worked in the first place because it didn't properly handle the case where the <app_data_dir>/<APP_NAME> does not exist. The step with creation of the directory was omitted. After the fix, it worked properly even without permission elevation.
